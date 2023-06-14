@@ -46,7 +46,7 @@ class Test {
 		m1.toMont();
 		m2.toMont();
 		//long startMMul = System.nanoTime();
-		for (int i = 0; i < 10000000; i++){
+		for (int i = 0; i < 100000000; i++){
 			m1.setElement(m1.mul(m2));
 		}	
 		//long endMMul = System.nanoTime();
@@ -54,7 +54,7 @@ class Test {
 		long endM = System.nanoTime();
 
 		long startF = System.nanoTime();
-		for (int i = 0; i < 10000000; i++){
+		for (int i = 0; i < 100000000; i++){
 			f1.setElement(f1.mul(f2));
 		}	
 		long endF = System.nanoTime();
