@@ -12,7 +12,7 @@ public class FieldElement extends BaseFieldElement {
 		this.element=e;
 	}
 	
-	public FieldElement mul(BaseFieldElement b) {
-		return new FieldElement(this.element.multiply(b.element).mod(N));
+	public BigInteger mul(BaseFieldElement b) {
+		return this.element.multiply(b.element).mod(N);
 	}
 }

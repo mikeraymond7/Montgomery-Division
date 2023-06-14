@@ -4,22 +4,14 @@ public class MontFieldElement extends BaseFieldElement {
 
 	/** N and R are chosen such that R > N and gcd(R,N) = 1 */
 
-	//protected final BigInteger N = new BigInteger("21888242871839275222246405745257275088548364400416034343698204186575808495617"); 
 	protected final BigInteger R = new BigInteger("28948022309329048855892746252171976963317496166410141009864396001978282409984");
 
-/*
-	protected final BigInteger N = new BigInteger("17"); 
-	protected final BigInteger R = new BigInteger("100");
-*/
 	/** Rp and Np are constants calculated based on N and R*/
 
 	protected final BigInteger Rp = new BigInteger("17773755579518009376303681366703133516854333631346829854655645366227550102839"); 
 	protected final BigInteger Np = new BigInteger("23506458515151433264464083090194480587220214185280767566518238411631651454975");
 	//protected final BigInteger Np = R.multiply(Rp).subtract(BigInteger.ONE).divide(N);
-/*
-	protected final BigInteger Rp = new BigInteger("8"); 
-	protected final BigInteger Np = new BigInteger("47");
-*/
+
 	protected boolean inMont = false;
 
 	/** Constructor */
@@ -28,7 +20,7 @@ public class MontFieldElement extends BaseFieldElement {
 	}
 
 	/** Constructor for internal functions */
-	protected MontFieldElement(BigInteger e, boolean in_mont){
+	public MontFieldElement(BigInteger e, boolean in_mont){
 		super(e);
 		inMont = in_mont;
 	}
@@ -50,7 +42,7 @@ public class MontFieldElement extends BaseFieldElement {
 	}
 
 	/** Multiply two MontFieldElement objects together and return a new one */
-	public MontFieldElement mul(BaseFieldElement b) {
+	public BigInteger mul(BaseFieldElement b) {
 		if (!(b instanceof MontFieldElement)) {
 			throw new IllegalArgumentException("Multiplication can only be performed with two MontFieldElement instances.");
 		}
@@ -65,8 +57,7 @@ public class MontFieldElement extends BaseFieldElement {
 
 // Would it be faster to simply return the BigInteger and then set_element() to an existing MontFieldElement?
 
-		//return new MontFieldElement(reduction(this.element.multiply(b.element)),true);
-		return new MontFieldElement(reduction(this.element.multiply(b.element)),true);
+		return reduction(this.element.multiply(b.element));
 	}
 
 	/** Converts element to Montgomery Form */ 

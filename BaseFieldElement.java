@@ -23,6 +23,6 @@ abstract class BaseFieldElement {
 
 	/** Multiplies BaseFieldElement elements together, ensures 
 		they are within the field order, and returns the outcome */
-	abstract BaseFieldElement mul(BaseFieldElement b);
+	abstract BigInteger mul(BaseFieldElement b);
 
 }

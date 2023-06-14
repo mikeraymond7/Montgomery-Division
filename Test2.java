@@ -18,7 +18,7 @@ class Test2 {
 		System.out.println("m1 in Mont Form: " + m1.toMont());
 		System.out.println("m2 in Mont Form: " + m2.toMont());
 		
-		MontFieldElement product = m1.mul(m2);
+		MontFieldElement product = new MontFieldElement(m1.mul(m2),true);
 		System.out.println("m1 in reduced from Mont Form: " + m1.fromMont());
 		System.out.println("m2 in reduced from Mont Form: " + m2.fromMont());
 

@@ -15,7 +15,7 @@ class Test {
 
 		FieldElement f1 = new FieldElement(x);
 		FieldElement f2 = new FieldElement(y);
-		BigInteger real = f1.mul(f2).getElement();
+		BigInteger real = f1.mul(f2);
 
 		System.out.print(String.format("Expecting (%s * %s) mod %s", x, y, m1.getN()));
 		System.out.println(" = " + real);
@@ -23,7 +23,7 @@ class Test {
 		System.out.println("m1 in Mont Form: " + m1.toMont());
 		System.out.println("m2 in Mont Form: " + m2.toMont());
 		
-		MontFieldElement product = m1.mul(m2);
+		MontFieldElement product = new MontFieldElement(m1.mul(m2), true);
 		m1.fromMont();
 		m2.fromMont();		
 		System.out.println("m1 after fromMont = " + m1.getElement());
@@ -45,17 +45,17 @@ class Test {
 		long startM = System.nanoTime();
 		m1.toMont();
 		m2.toMont();
-		long startMMul = System.nanoTime();
-		for (int i = 0; i < 1000000; i++){
-			m1 = m1.mul(m2);
+		//long startMMul = System.nanoTime();
+		for (int i = 0; i < 10000000; i++){
+			m1.setElement(m1.mul(m2));
 		}	
-		long endMMul = System.nanoTime();
+		//long endMMul = System.nanoTime();
 		m1.fromMont();
 		long endM = System.nanoTime();
 
 		long startF = System.nanoTime();
-		for (int i = 0; i < 1000000; i++){
-			f1 = f1.mul(f2);
+		for (int i = 0; i < 10000000; i++){
+			f1.setElement(f1.mul(f2));
 		}	
 		long endF = System.nanoTime();
 
@@ -66,7 +66,7 @@ class Test {
 
 		
 		System.out.println("Total Montgomery Time = " + (endM-startM)/1000000 + "ms");
-		System.out.println("Montgomery Multiplication Time = " + (endMMul-startMMul)/1000000 + "ms");
+		//System.out.println("Montgomery Multiplication Time = " + (endMMul-startMMul)/1000000 + "ms");
 		System.out.println("Total Standard BigInteger Time = " + (endF-startF)/1000000 + "ms");
 		
 
