@@ -51,7 +51,6 @@ public class MontFieldElement extends BaseFieldElement {
 
 	/** Multiply two MontFieldElement objects together and return a new one */
 	public MontFieldElement mul(BaseFieldElement b) {
-		System.out.println("Np = " + Np);
 		if (!(b instanceof MontFieldElement)) {
 			throw new IllegalArgumentException("Multiplication can only be performed with two MontFieldElement instances.");
 		}
@@ -97,8 +96,8 @@ public class MontFieldElement extends BaseFieldElement {
 
 	/** Reduction for chained multiplications or conversion back to standard form */
 	protected BigInteger reduction(BigInteger T) { 
-		BigInteger m = ((T.mod(R)).multiply(Np)).mod(R); // use bitshifting
-		BigInteger t = (T.add(m.multiply(N))).divide(R);
+		BigInteger m = (T.and(R.subtract(BigInteger.ONE)).multiply(Np)).and(R.subtract(BigInteger.ONE)); // use bitshifting
+		BigInteger t = (T.add(m.multiply(N))).shiftRight(R.bitLength() - 1);
 
 		if (t.compareTo(N) >= 0) {
 			return t.subtract(N);

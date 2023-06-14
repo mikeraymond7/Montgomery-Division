@@ -15,9 +15,10 @@ class Test {
 
 		FieldElement f1 = new FieldElement(x);
 		FieldElement f2 = new FieldElement(y);
+		BigInteger real = f1.mul(f2).getElement();
 
 		System.out.print(String.format("Expecting (%s * %s) mod %s", x, y, m1.getN()));
-		System.out.println(" = " + f1.mul(f2).getElement());
+		System.out.println(" = " + real);
 
 		System.out.println("m1 in Mont Form: " + m1.toMont());
 		System.out.println("m2 in Mont Form: " + m2.toMont());
@@ -27,8 +28,17 @@ class Test {
 		m2.fromMont();		
 		System.out.println("m1 after fromMont = " + m1.getElement());
 
-		System.out.println("Product before reduction: " + product.getElement());
-		System.out.println("Product after reduction: " + product.fromMont());
+		System.out.println("Product in Mont Form: " + product.getElement());
+		System.out.println("Actual Montgomery Product: " + product.fromMont());
+		System.out.println("Real Product: " + real);
+		if (product.getElement().compareTo(real) == 0){
+			System.out.println("Montgomery and BigInteger values are equivalent");
+		}
+		else{
+			System.out.println("Montgomery and BigInteger values are NOT equivalent");
+		}
+		
+
 
 		System.out.println("\n\nTesting looping");
 
@@ -36,7 +46,7 @@ class Test {
 		m1.toMont();
 		m2.toMont();
 		long startMMul = System.nanoTime();
-		for (int i = 0; i < 1000; i++){
+		for (int i = 0; i < 1000000; i++){
 			m1 = m1.mul(m2);
 		}	
 		long endMMul = System.nanoTime();
@@ -44,7 +54,7 @@ class Test {
 		long endM = System.nanoTime();
 
 		long startF = System.nanoTime();
-		for (int i = 0; i < 1000; i++){
+		for (int i = 0; i < 1000000; i++){
 			f1 = f1.mul(f2);
 		}	
 		long endF = System.nanoTime();

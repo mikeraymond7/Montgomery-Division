@@ -1,3 +1,3 @@
 #!
 javac *.java
-java Test2
+java Test
