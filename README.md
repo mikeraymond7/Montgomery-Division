@@ -18,7 +18,7 @@ def reduction:
   return t
 ```  
 ## Conversion to Montgomery Form  
-Given *a* is an integer, *a*~mont~ = (*a*R) % N
+Given *a* is an integer, *a*<sub>mont</sub> = (*a*R) % N
 
 ## Conversion back to normal form
-Given *a*~mont~ is an integer, *a* = reduction(*a*~mont~)
+Given *a*<sub>mont</sub> is an integer, *a* = reduction(*a*<sub>mont</sub>)
