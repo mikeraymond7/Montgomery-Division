@@ -9,10 +9,10 @@ Montgomery Modular Multiplication eliminates the need for constant expensive div
  - Rp --> R.modInverse(N)
  - Np --> Satisfies the equation: N\*Np - R\*Rp == 1  
 ## Reduction Algorithm
-`
+```
 m -> ((T%R) * Np) mod R  
 t -> (T + mN) / R  
 if t >= N:  
   return t - N
 return t
-`
+```
