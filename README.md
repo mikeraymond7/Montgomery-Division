@@ -22,3 +22,6 @@ Given *a* is an integer, *a*<sub>mont</sub> = (*a*R) % N
 
 ## Conversion back to normal form
 Given *a*<sub>mont</sub> is an integer, *a* = reduction(*a*<sub>mont</sub>)
+
+## Conclusions  
+Current Implementation is still 2x slower than standard BigInteger operations with modular division.

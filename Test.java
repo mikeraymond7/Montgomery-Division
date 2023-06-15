@@ -32,21 +32,22 @@ class Test {
 		System.out.println("Actual Montgomery Product: " + product.fromMont());
 		System.out.println("Real Product: " + real);
 		if (product.getElement().compareTo(real) == 0){
-			System.out.println("Montgomery and BigInteger values are equivalent");
+			System.out.println("\nMontgomery and BigInteger values are equivalent");
 		}
 		else{
-			System.out.println("Montgomery and BigInteger values are NOT equivalent");
+			System.out.println("\nMontgomery and BigInteger values are NOT equivalent");
 		}
 		
 
 
 		System.out.println("\n\nTesting looping");
 
+		int bound = 10000000;
 		long startM = System.nanoTime();
 		m1.toMont();
 		m2.toMont();
 		//long startMMul = System.nanoTime();
-		for (int i = 0; i < 100000000; i++){
+		for (int i = 0; i < bound; i++){
 			m1.setElement(m1.mul(m2));
 		}	
 		//long endMMul = System.nanoTime();
@@ -54,13 +55,16 @@ class Test {
 		long endM = System.nanoTime();
 
 		long startF = System.nanoTime();
-		for (int i = 0; i < 100000000; i++){
+		for (int i = 0; i < bound; i++){
 			f1.setElement(f1.mul(f2));
 		}	
 		long endF = System.nanoTime();
 
 		System.out.println("m1 = " + m1.getElement());
 		System.out.println("f1 = " + f1.getElement());
+		if (f1.getElement().compareTo(m1.getElement()) == 0) {
+			 System.out.println("\nm1 and f1 are equal");
+		} else { System.out.println("\nm1 and f1 not equal"); } 
 		
 		System.out.println("\nRuntime Statistics: ");
 
@@ -68,7 +72,7 @@ class Test {
 		System.out.println("Total Montgomery Time = " + (endM-startM)/1000000 + "ms");
 		//System.out.println("Montgomery Multiplication Time = " + (endMMul-startMMul)/1000000 + "ms");
 		System.out.println("Total Standard BigInteger Time = " + (endF-startF)/1000000 + "ms");
-		
+		System.out.println((endM-startM)/(endF-startF) + "x difference");
 
 	}
 }

@@ -24,6 +24,13 @@ class Test2 {
 
 		System.out.println("Product before reduction: " + product.getElement());
 		System.out.println("Product after reduction: " + product.fromMont());
+		System.out.println("Product from field elem: " + f1.mul(f2));
+		if (f1.mul(f2).compareTo(product.getElement()) != 0) {
+			System.out.println("Values not equal");
+		}
+		else {
+			System.out.println("Values equal");
+		}
 
 
 	}
